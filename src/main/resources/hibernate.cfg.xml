@@ -13,6 +13,8 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         
-        <mapping class="web.member.pojo.Member"></mapping>
+        <mapping class="web.member.entity.Member"></mapping>
+        <mapping class="web.emp.entity.Dept"></mapping>
+        <mapping class="web.emp.entity.Emp"></mapping>
     </session-factory>
 </hibernate-configuration>

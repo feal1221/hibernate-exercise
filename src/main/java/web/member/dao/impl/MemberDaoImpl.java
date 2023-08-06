@@ -1,6 +1,6 @@
 package web.member.dao.impl;
 
-import static core.util.CommonUtil.getConnection;
+//import static core.util.CommonUtil.getConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import org.hibernate.query.Query;
 import org.jvnet.fastinfoset.FastInfosetParser;
 
 import web.member.dao.MemberDao;
-import web.member.pojo.Member;
+import web.member.entity.Member;
 
 public class MemberDaoImpl implements MemberDao {
 
@@ -72,8 +72,8 @@ public class MemberDaoImpl implements MemberDao {
 			.append("pass = :pass,")
 			.append("roleId = :roleId,")
 			.append("updater = :updater,")
-			.append("lastUpdated = NOW() ")
-			.append("WHERE username = :usename");
+			.append("lastUpdatedDate = NOW() ")
+			.append("WHERE username = :username");
 		
 		Query<?> query = getSession().createQuery(hql.toString());
 		if (password != null && !password.isEmpty()) {
@@ -184,7 +184,7 @@ public class MemberDaoImpl implements MemberDao {
 		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 		CriteriaQuery<Member> criteriaQuery = criteriaBuilder.createQuery(Member.class);
 		Root<Member> root = criteriaQuery.from(Member.class);
-		criteriaQuery.where(criteriaBuilder.equal(root.get("username",username)));
+		criteriaQuery.where(criteriaBuilder.equal(root.get("username"), username));
 		return session
 				.createQuery(criteriaQuery)
 				.uniqueResult();
@@ -224,7 +224,7 @@ public class MemberDaoImpl implements MemberDao {
 	public Member selectForLogin(String username, String password) {
 		final String sql = "select * from MEMBER where USERNAME = :username and PASSWORD = :password";
 		return getSession()
-				.createNamedQuery(sql, Member.class)
+				.createNativeQuery(sql, Member.class)
 				.setParameter("username", username)
 				.setParameter("password", password)
 				.uniqueResult();

@@ -12,31 +12,65 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import core.util.HibernateUtil;
-import web.member.pojo.Member;
+import web.emp.entity.Dept;
+import web.emp.entity.Emp;
+import web.member.entity.Member;
+import web.member.service.impl.MemberServiceImpl;
 
 public class TestApp {
 	public static void main(String[] args) {
+		
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
+		//單向一對N
+//		Dept dept = session.get(Dept.class, 30);
+//		var emps = dept.getEmps();
+//		for (var emp:emps) {
+//			System.out.println(emp.getEname());
+		//單向一對N
+//		Emp emp = session.get(Emp.class, 7369);
+//		Dept dept= emp.getDept();
+//		System.out.println(dept.getDeptno());
+//		System.out.println(dept.getDname());
+		
+		//雙向
+//		Emp emp = session.get(Emp.class,7369);
+//		Dept dept = emp.getDept();
+//		List<Emp> emps=dept.getEmps();
+//		for (Emp tmp : emps) {
+//			System.out.println(tmp.getEname());
+//		}
+		//註冊
+//		MemberServiceImpl memImpl = new MemberServiceImpl();
+//		Member mem = new Mem
+//		memImpl.register(null)
+		
+		
+		
+		}
+		
+		
+		
+		
 		//select
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaQuery<Member> criteriaQuery = criteriaBuilder.createQuery(Member.class);
-		//from MEMBER
-		Root<Member> root = criteriaQuery.from(Member.class);
-		//where USERNAME = ? and PASSWORD= ?
-		criteriaQuery.where(criteriaBuilder.and(
-			criteriaBuilder.equal(root.get("username"), "admin"),
-			criteriaBuilder.equal(root.get("password"),"P@ssw0rd")
-		));
-		
-		//select username nickname
-		criteriaQuery.multiselect(root.get("username"),root.get("nickname"));
-		//加入orderby
-		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
-		
-		Member member = session.createQuery(criteriaQuery).uniqueResult();
-		System.out.println(member.getNickname());
-		
+//		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+//		CriteriaQuery<Member> criteriaQuery = criteriaBuilder.createQuery(Member.class);
+//		//from MEMBER
+//		Root<Member> root = criteriaQuery.from(Member.class);
+//		//where USERNAME = ? and PASSWORD= ?
+//		criteriaQuery.where(criteriaBuilder.and(
+//			criteriaBuilder.equal(root.get("username"), "admin"),
+//			criteriaBuilder.equal(root.get("password"),"P@ssw0rd")
+//		));
+//		
+//		//select username nickname
+//		criteriaQuery.multiselect(root.get("username"),root.get("nickname"));
+//		//加入orderby
+//		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+//		
+//		Member member = session.createQuery(criteriaQuery).uniqueResult();
+//		System.out.println(member.getNickname());
+//		
 		
 //		Member mem = new Member();
 //		//新增
@@ -60,7 +94,7 @@ public class TestApp {
 //		for (Member member : test.selectAll()) {
 //			System.out.println(member.getNickname());
 //		}
-	}
+	
 	
 	public Integer insert(Member member) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
