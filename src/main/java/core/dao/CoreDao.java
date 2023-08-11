@@ -19,5 +19,6 @@ public interface CoreDao<P, I> {
 	
 	default Session getSession() {
 		return getSessionFactory().getCurrentSession();
+//		return getSessionFactory().openSession();
 	}
 }

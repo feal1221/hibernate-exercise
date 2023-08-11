@@ -1,27 +1,70 @@
 package app;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 import core.util.HibernateUtil;
 import web.emp.entity.Dept;
 import web.emp.entity.Emp;
+import web.member.dao.MemberDao;
 import web.member.entity.Member;
 import web.member.service.impl.MemberServiceImpl;
 
+
 public class TestApp {
 	public static void main(String[] args) {
+//		GenericApplicationContext applicationContext = new GenericApplicationContext();
+//        new XmlBeanDefinitionReader(applicationContext).loadBeanDefinitions("applicationContext.xml");
+//        applicationContext.refresh();
+//        
+//        MemberDao memberDao = applicationContext.getBean(MemberDao.class);
+//        System.out.println(memberDao.selectById(1).getNickname());
+//            
+//        ((ConfigurableApplicationContext) applicationContext).close();
 		
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
+		
+		
+//		//Spring xml
+//		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		DataSource dataSource = applicationContext.getBean(DataSource.class);
+//		
+//		try(Connection con = dataSource.getConnection();
+//			PreparedStatement pre = con.prepareStatement("select * from MEMBER where ID=?");
+//			) {
+//			pre.setInt(1, 2);
+//			try(ResultSet rs = pre.executeQuery()){
+//				if(rs.next()) {
+//					System.out.println(rs.getString("Nickname"));
+//				}
+//				
+//			}
+//			
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		
+		//Hibernate
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.openSession();
 		//單向一對N
 //		Dept dept = session.get(Dept.class, 30);
 //		var emps = dept.getEmps();
